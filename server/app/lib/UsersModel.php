@@ -31,12 +31,12 @@ class UsersModel extends RestServer
     public function addUser($url,$param)
     {
         var_dump($param);
-     $firstName = $this->link->quote(trim($_POST['first_name']));
-        $lastName = $this->link->quote(trim($_POST['last_name']));
         $login = $this->link->quote($param['login']);
         $pass = md5(md5(trim($_POST['pass'])));
         $pass = $this->link->quote($pass);
-        $sql = "INSERT INTO clients (first_name, last_name, login, pass) VALUES (".$firstName.", ".$lastName.", ".$login.", ".$pass.")";
+        $email = $this->link->quote($param['email']);
+        $hash = "firstHash";
+        $sql = "INSERT INTO users (login, pass, email, hash) VALUES (".$login.", ".$pass.", ".$email.", ".$hash.")";
         $count = $this->link->exec($sql);
         if ($count === false)
         {
