@@ -28,6 +28,22 @@ class UsersModel extends RestServer
         $str = json_encode($data);
         return $str;
     }
+    public function addUser($url,$param)
+    {
+        var_dump($param);
+     $firstName = $this->link->quote(trim($_POST['first_name']));
+        $lastName = $this->link->quote(trim($_POST['last_name']));
+        $login = $this->link->quote($param['login']);
+        $pass = md5(md5(trim($_POST['pass'])));
+        $pass = $this->link->quote($pass);
+        $sql = "INSERT INTO clients (first_name, last_name, login, pass) VALUES (".$firstName.", ".$lastName.", ".$login.", ".$pass.")";
+        $count = $this->link->exec($sql);
+        if ($count === false)
+        {
+            return false;
+        }
+        return $count;
+    }
 
     public function loginUser($url,$param)
     {
