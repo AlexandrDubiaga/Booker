@@ -30,8 +30,9 @@ class UsersModel extends RestServer
     }
     public function addUser($url,$param)
     {
-        var_dump($param);
+       
         $login = $this->link->quote($param['login']);
+        echo   $login;
         $pass = md5(md5(trim($_POST['pass'])));
         $pass = $this->link->quote($pass);
         $email = $this->link->quote($param['email']);
