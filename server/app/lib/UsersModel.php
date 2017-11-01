@@ -13,7 +13,7 @@ class UsersModel extends RestServer
     public function checkUsers($param=false)
     {
         $id = $this->link->quote(($param[0]));
-        $sql = "SELECT u.hash, u.login, r.name as role FROM users u LEFT JOIN roles r ON u.id_role=r.id  WHERE u.id=".$id;
+        $sql = "SELECT u.hash, u.login, r.name as role FROM users u LEFT JOIN roles r ON u.id_role=r.id" /* WHERE u.id=".$id*/;
         $sth = $this->link->prepare($sql);
         $result = $sth->execute();
         if (false === $result)
