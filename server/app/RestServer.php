@@ -33,7 +33,8 @@ class RestServer extends DB
                     $this->param = $this->setMethod('delete'.ucfirst($dir), explode('/',  $index));
                 break;
                 case 'POST':
-                     $this->setMethod('post'.ucfirst($dir), explode('/',  $index),$x);
+                  $put = json_decode(file_get_contents("php://input"), true);
+                    $this->setMethod('post'.ucfirst($dir), explode('/', $index), $put);
    /*
                     $putV = (explode('&', file_get_contents("php://input")));
                     $put = array();
