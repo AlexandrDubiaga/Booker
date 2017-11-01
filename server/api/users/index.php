@@ -13,9 +13,9 @@ class Users extends RestServer
         $result = $this->lib->checkUsers($param);
         return $result;
     }
-    public function postUsers($url,$data)
+    public function postUsers($url)
     {
-        $result = $this->lib->addUser($url,$data);
+        $result = $this->lib->addUser($url);
         return $result;
     }
     public function putUsers($url,$data)
