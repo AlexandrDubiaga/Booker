@@ -2,10 +2,10 @@
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Ноя 01 2017 г., 05:06
--- Версия сервера: 5.5.53
--- Версия PHP: 5.5.38
+-- Г•Г®Г±ГІ: 127.0.0.1:3306
+-- Г‚Г°ГҐГ¬Гї Г±Г®Г§Г¤Г Г­ГЁГї: ГЌГ®Гї 01 2017 ГЈ., 05:06
+-- Г‚ГҐГ°Г±ГЁГї Г±ГҐГ°ГўГҐГ°Г : 5.5.53
+-- Г‚ГҐГ°Г±ГЁГї PHP: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `user2`
+-- ГЃГ Г§Г  Г¤Г Г­Г­Г»Гµ: `user2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `events`
+-- Г‘ГІГ°ГіГЄГІГіГ°Г  ГІГ ГЎГ«ГЁГ¶Г» `events`
 --
 
 CREATE TABLE `events` (
@@ -40,7 +40,7 @@ CREATE TABLE `events` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `roles`
+-- Г‘ГІГ°ГіГЄГІГіГ°Г  ГІГ ГЎГ«ГЁГ¶Г» `roles`
 --
 
 CREATE TABLE `roles` (
@@ -49,7 +49,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `roles`
+-- Г„Г Г¬ГЇ Г¤Г Г­Г­Г»Гµ ГІГ ГЎГ«ГЁГ¶Г» `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`) VALUES
@@ -59,7 +59,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `rooms`
+-- Г‘ГІГ°ГіГЄГІГіГ°Г  ГІГ ГЎГ«ГЁГ¶Г» `rooms`
 --
 
 CREATE TABLE `rooms` (
@@ -68,7 +68,7 @@ CREATE TABLE `rooms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `rooms`
+-- Г„Г Г¬ГЇ Г¤Г Г­Г­Г»Гµ ГІГ ГЎГ«ГЁГ¶Г» `rooms`
 --
 
 INSERT INTO `rooms` (`id`, `name`) VALUES
@@ -79,7 +79,7 @@ INSERT INTO `rooms` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Г‘ГІГ°ГіГЄГІГіГ°Г  ГІГ ГЎГ«ГЁГ¶Г» `users`
 --
 
 CREATE TABLE `users` (
@@ -87,22 +87,23 @@ CREATE TABLE `users` (
   `id_role` int(11) NOT NULL DEFAULT '1',
   `login` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
+   `email` varchar(255) NOT NULL,
   `hash` varchar(255) NOT NULL DEFAULT 'first_hash'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
+-- Г„Г Г¬ГЇ Г¤Г Г­Г­Г»Гµ ГІГ ГЎГ«ГЁГ¶Г» `users`
 --
 
-INSERT INTO `users` (`id`, `id_role`, `login`, `pass`, `hash`) VALUES
-(1, 2, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '6b50b565f2d1e458188222a68ca686aa');
+INSERT INTO `users` (`id`, `id_role`, `login`, `pass`,`email`, `hash`) VALUES
+(1, 2, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 'alex@gmail.com', '6b50b565f2d1e458188222a68ca686aa');
 
 --
--- Индексы сохранённых таблиц
+-- Г€Г­Г¤ГҐГЄГ±Г» Г±Г®ГµГ°Г Г­ВёГ­Г­Г»Гµ ГІГ ГЎГ«ГЁГ¶
 --
 
 --
--- Индексы таблицы `events`
+-- Г€Г­Г¤ГҐГЄГ±Г» ГІГ ГЎГ«ГЁГ¶Г» `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id`),
@@ -110,19 +111,19 @@ ALTER TABLE `events`
   ADD KEY `events_fk1` (`id_room`);
 
 --
--- Индексы таблицы `roles`
+-- Г€Г­Г¤ГҐГЄГ±Г» ГІГ ГЎГ«ГЁГ¶Г» `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `rooms`
+-- Г€Г­Г¤ГҐГЄГ±Г» ГІГ ГЎГ«ГЁГ¶Г» `rooms`
 --
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `users`
+-- Г€Г­Г¤ГҐГЄГ±Г» ГІГ ГЎГ«ГЁГ¶Г» `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -130,42 +131,42 @@ ALTER TABLE `users`
   ADD KEY `users_fk0` (`id_role`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT Г¤Г«Гї Г±Г®ГµГ°Г Г­ВёГ­Г­Г»Гµ ГІГ ГЎГ«ГЁГ¶
 --
 
 --
--- AUTO_INCREMENT для таблицы `events`
+-- AUTO_INCREMENT Г¤Г«Гї ГІГ ГЎГ«ГЁГ¶Г» `events`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT для таблицы `roles`
+-- AUTO_INCREMENT Г¤Г«Гї ГІГ ГЎГ«ГЁГ¶Г» `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT для таблицы `rooms`
+-- AUTO_INCREMENT Г¤Г«Гї ГІГ ГЎГ«ГЁГ¶Г» `rooms`
 --
 ALTER TABLE `rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT Г¤Г«Гї ГІГ ГЎГ«ГЁГ¶Г» `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- Ограничения внешнего ключа сохраненных таблиц
+-- ГЋГЈГ°Г Г­ГЁГ·ГҐГ­ГЁГї ГўГ­ГҐГёГ­ГҐГЈГ® ГЄГ«ГѕГ·Г  Г±Г®ГµГ°Г Г­ГҐГ­Г­Г»Гµ ГІГ ГЎГ«ГЁГ¶
 --
 
 --
--- Ограничения внешнего ключа таблицы `events`
+-- ГЋГЈГ°Г Г­ГЁГ·ГҐГ­ГЁГї ГўГ­ГҐГёГ­ГҐГЈГ® ГЄГ«ГѕГ·Г  ГІГ ГЎГ«ГЁГ¶Г» `events`
 --
 ALTER TABLE `events`
   ADD CONSTRAINT `events_fk0` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `events_fk1` FOREIGN KEY (`id_room`) REFERENCES `rooms` (`id`);
 
 --
--- Ограничения внешнего ключа таблицы `users`
+-- ГЋГЈГ°Г Г­ГЁГ·ГҐГ­ГЁГї ГўГ­ГҐГёГ­ГҐГЈГ® ГЄГ«ГѕГ·Г  ГІГ ГЎГ«ГЁГ¶Г» `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_fk0` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`);
