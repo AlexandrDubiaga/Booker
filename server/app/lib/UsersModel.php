@@ -35,7 +35,7 @@ class UsersModel extends RestServer
         $pass = md5(md5(trim($_POST['pass'])));
         $pass = $this->link->quote($pass);
         $email = $this->link->quote($param['email']);
-        $hash = "firstHash";
+        $hash = 'firstHash';
           $login = trim($login, "'");
           $pass = trim($pass, "'");
           $email = trim($email, "'");
