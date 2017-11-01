@@ -28,9 +28,9 @@ class UsersModel extends RestServer
         $str = json_encode($data);
         return $str;
     }
-    public function addUser($url,$param)
+    public function addUser($url)
     {
-        var_dump($param);
+        var_dump($url);
         $login = $this->link->quote($param['login']);
         $pass = md5(md5(trim($_POST['pass'])));
         $pass = $this->link->quote($pass);
