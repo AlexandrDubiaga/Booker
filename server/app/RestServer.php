@@ -33,9 +33,9 @@ class RestServer extends DB
                     $this->param = $this->setMethod('delete'.ucfirst($dir), explode('/',  $index));
                 break;
                 case 'POST':
-                  $put = json_decode(file_get_contents("php://input"), true);
+                 /* $put = json_decode(file_get_contents("php://input"), true);
                     $this->setMethod('post'.ucfirst($dir), explode('/', $index), $put);
-   /*
+   */
                     $putV = (explode('&', file_get_contents("php://input")));
                     $put = array();
                     foreach ($putV as $value)
@@ -43,7 +43,7 @@ class RestServer extends DB
                         $keyValue = explode('=', $value);
                         $put[$keyValue[0]]=$keyValue[1];
                     }
-                $this->setMethod('post'.ucfirst($dir), explode('/', $index), $put);*/
+                $this->setMethod('post'.ucfirst($dir), explode('/', $index), $put);
                 break;
                 case 'PUT':
                     $put = json_decode(file_get_contents("php://input"), true);
