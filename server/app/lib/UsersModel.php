@@ -32,13 +32,13 @@ class UsersModel extends RestServer
     {
        
         $login = $this->link->quote($param['login']);
-      
-          $login = trim($login, "'");
-          echo   $login;
         $pass = md5(md5(trim($_POST['pass'])));
         $pass = $this->link->quote($pass);
         $email = $this->link->quote($param['email']);
         $hash = "firstHash";
+          $login = trim($login, "'");
+          $pass = trim($pass, "'");
+          $email = trim($email, "'");
         $sql = "INSERT INTO users (login, pass, email, hash) VALUES (".$login.", ".$pass.", ".$email.", ".$hash.")";
         $count = $this->link->exec($sql);
         if ($count === false)
