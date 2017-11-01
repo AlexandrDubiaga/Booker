@@ -11,7 +11,7 @@ class Users extends RestServer
     public function getUsers($param)
     {
         $result = $this->lib->checkUsers($param);
-        var_dump($result);
+      
         return $result;
     }
     public function postUsers($url,$param)
