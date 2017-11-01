@@ -26,7 +26,7 @@ class UsersModel extends RestServer
             return false;
         }
         $str = json_encode($data);
-        var_dump($str);
+      
         return $str;
     }
     public function addUser($url,$param)
