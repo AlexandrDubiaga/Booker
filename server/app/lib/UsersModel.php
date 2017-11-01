@@ -32,7 +32,9 @@ class UsersModel extends RestServer
     {
        
         $login = $this->link->quote($param['login']);
-        echo   $login;
+      
+          $login = trim($login, "'");
+          echo   $login;
         $pass = md5(md5(trim($_POST['pass'])));
         $pass = $this->link->quote($pass);
         $email = $this->link->quote($param['email']);
