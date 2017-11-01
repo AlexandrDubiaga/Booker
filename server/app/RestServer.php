@@ -15,7 +15,7 @@ class RestServer extends DB
         parent::__construct();
         $this->db = $this->dBMain;
     }
-    
+
     public function run()
     {
       $this->url = list($s, $user, $REST, $server, $api, $dir, $index, $class, $data) = explode("/", $_SERVER['REQUEST_URI'], 7);
@@ -52,15 +52,15 @@ class RestServer extends DB
                 exit();
                 break;
         }
-        
-        
+
+
     }
 
     public function setMethod($classMethod, $param=false, $outPutt = false)
     {
 
                 echo $this->$classMethod($param,$outPutt);
-      
+
     }
      protected function encodedData($data)
     {
@@ -82,7 +82,7 @@ class RestServer extends DB
                  return  $this->convertToJson($data);
         }
     }
-    
+
     public function convertToJson($data)
     {
         //header('Content-Type: application/json');
@@ -92,7 +92,7 @@ class RestServer extends DB
     {
          header("Content-Type: text/javascript");
          print_r($data);
-        
+
     }
      public function convertToHtml($data)
     {
@@ -107,8 +107,8 @@ class RestServer extends DB
             }
            $out = '</li>';
          return '<ul>'.convertToHtml($data).'</ul>';
-    }  
-    
+    }
+
     public function convertToXml($data, $root)
     {
         header("Content-type: text/xml");
@@ -132,7 +132,7 @@ class RestServer extends DB
         }
         return $xml->asXML();
 }
- 
+
     function array2xml( $array, &$xml, $root )
     {
         foreach( $array as $element=>$value )
@@ -159,7 +159,7 @@ class RestServer extends DB
         }
     }
 }
- 
+
     function isNumericKeys( $array )
     {
         foreach( $array as $key=>$value )
@@ -171,6 +171,6 @@ class RestServer extends DB
         }
         return true;
     }
-    
+
 }
 
