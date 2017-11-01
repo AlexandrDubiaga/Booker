@@ -39,7 +39,7 @@ class UsersModel extends RestServer
           $hash = $this->link->quote($hash);
           /*$login = trim($login, "'");
           $email = trim($email, "'");*/
-        $sql = "INSERT INTO users (login, pass, email, hash) VALUES (".$login.", "$pass.","$email.","$hash.")";
+        $sql = "INSERT INTO users (login, pass, email, hash) VALUES (".$login.", ".$pass.",".$email.",".$hash.")";
         $count = $this->link->exec($sql);
         if ($count === false)
         {
