@@ -48,6 +48,7 @@ class EmployeesModel extends RestServer
     {
  
       var_dump($id);
+        var_dump($param);
 
 
     }
