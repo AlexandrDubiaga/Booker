@@ -49,7 +49,7 @@ class EmployeesModel extends RestServer
  
         $idUs = $id[0];
        echo $idUs;
-        $sql = 'UPDATE users SET login="test", email="test",login="role" WHERE id=' . $idUs;
+        $sql = 'UPDATE users SET login='test', email='test',login='role' WHERE id=' . $idUs;
         $count = $this->link->exec($sql);
         if ($count === false)
         {
