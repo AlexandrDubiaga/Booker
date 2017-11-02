@@ -24,5 +24,10 @@ class Users extends RestServer
         $result = $this->lib->loginUser($url,$data);
         return $result;
     }
+    public function deleteUsers($url,$data)
+    {
+        $result = $this->lib->deleteUser($url,$data);
+        return $result;
+    }
 }
 $cars = new Users();

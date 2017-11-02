@@ -30,7 +30,7 @@ class RestServer extends DB
                 $this->setMethod('get'.ucfirst($dir), explode('/', $index));
                 break;
                 case 'DELETE':
-                    $this->param = $this->setMethod('delete'.ucfirst($dir), explode('/',  $index));
+                    $this->setMethod('delete'.ucfirst($dir), explode('/',  $index));
                 break;
                 case 'POST':
                  /* $put = json_decode(file_get_contents("php://input"), true);
@@ -50,8 +50,9 @@ class RestServer extends DB
                     $this->setMethod('put'.ucfirst($dir), explode('/', $index), $put);
                     break;
             case 'OPTIONS':
-                header('Access-Control-Allow-Methods: PUT');
                 header('Access-Control-Allow-Origin:*');
+                header('Access-Control-Allow-Methods: PUT, POST, GET, DELETE');
+                header('Access-Control-Allow-Headers: Authorization, Content-Type');
                 exit();
                 break;
         }

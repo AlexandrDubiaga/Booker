@@ -13,7 +13,7 @@ class UsersModel extends RestServer
     public function checkUsers($param=false)
     {
         $id = $this->link->quote(($param[0]));
-        $sql = "SELECT u.hash, u.login, r.name as role FROM users u LEFT JOIN roles r ON u.id_role=r.id" /* WHERE u.id=".$id*/;
+        $sql = "SELECT u.hash, u.login, r.name as role FROM users u LEFT JOIN roles r ON u.id_role=r.id WHERE u.id=".$id;
         $sth = $this->link->prepare($sql);
         $result = $sth->execute();
         if (false === $result)
@@ -31,15 +31,13 @@ class UsersModel extends RestServer
     }
     public function addUser($url,$param)
     {
-        var_dump($param);
         $login = $this->link->quote($param['login']);
         $pass = md5(md5(trim($_POST['pass'])));
         $pass = $this->link->quote($pass);
         $email = $this->link->quote($param['email']);
         $hash = "firstHash";
           $hash = $this->link->quote($hash);
-          /*$login = trim($login, "'");
-          $email = trim($email, "'");*/
+
         $sql = "INSERT INTO users (login, pass, email, hash) VALUES (".$login.", ".$pass.",".$email.",".$hash.")";
         $count = $this->link->exec($sql);
         if ($count === false)
@@ -107,5 +105,19 @@ class UsersModel extends RestServer
             $code .= $chars[mt_rand(0,$clen)];
         }
         return $code;
+    }
+    public function deleteUser($id,$url)
+    {
+        $idUser = $this->link->quote($id[0]);
+        $sql = "DELETE FROM users WHERE id = ".$idUser;
+        $count = $this->link->exec($sql);
+        if($count)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }
