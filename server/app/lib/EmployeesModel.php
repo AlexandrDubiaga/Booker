@@ -46,8 +46,7 @@ class EmployeesModel extends RestServer
     }
     public function updateEmployees($id,$param)
     {
- echo "update";
-      var_dump($id);
+
         var_dump($param);
 
 
