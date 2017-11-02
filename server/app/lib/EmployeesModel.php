@@ -44,10 +44,18 @@ class EmployeesModel extends RestServer
         }
         return $count;
     }
-    public function updateEmployees($id,$param)
+    public function updateEmployees($url,$param)
     {
-
-        var_dump($param);
+          $id = $this->link->quote($param['id']);
+          $login = $this->link->quote($param['login']);
+          $email = $this->link->quote($param['email']);
+          $sql = 'UPDATE users SET login=' . $login . ', email='.$email .' WHERE id=' . $id;
+          $count = $this->link->exec($sql);
+            if ($count === false)
+            {
+                return false;
+            }
+       
 
 
     }
