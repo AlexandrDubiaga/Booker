@@ -29,26 +29,45 @@ class RoomsModel extends RestServer
         return $str;*/
         
         
-        var_dump($param);
+      
           
-       //if($param[0] == "" )
-       //{
+       if($param[0] == "")
+       {
           $sql = "SELECT id,name FROM rooms";
-              $sth = $this->link->prepare($sql);
-               $result = $sth->execute();
-             $data = $sth->fetchAll(PDO::FETCH_ASSOC);
-               return $data;
-       //}
+         $sth = $this->link->prepare($sql);
+        $result = $sth->execute();
+        if (false === $result)
+        {
+            return false;
+        }
+        $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($data))
+        {
+            return false;
+        }
+        $str = json_encode($data);
+        return $str;
+       }
         if ($param !== false)
         {
             $sql = "SELECT id,name FROM rooms";
             $sql .= " WHERE "."id" .'='.$this->link->quote($param[0]).' AND ';
        
         $sql = substr($sql, 0, -5);
-        $sth = $this->link->prepare($sql);
+        $sql = "SELECT id,name FROM rooms";
+         $sth = $this->link->prepare($sql);
         $result = $sth->execute();
+        if (false === $result)
+        {
+            return false;
+        }
         $data = $sth->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
+        if (empty($data))
+        {
+            return false;
+        }
+        $str = json_encode($data);
+        return $str;
         }
         
         
