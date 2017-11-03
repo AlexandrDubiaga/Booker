@@ -31,7 +31,7 @@ class RoomsModel extends RestServer
         
         var_dump($param);
           
-       if($param[0] == "")
+       if($param[0] == "" || $param[0]==".txt" || $param[0]==".json" || $param[0]==".html" || $param[0]==".xml" )
        {
           $sql = "SELECT id,name FROM rooms";
               $sth = $this->link->prepare($sql);
