@@ -48,7 +48,7 @@ class RoomsModel extends RestServer
         $str = json_encode($data);
         return $str;
        }
-        if ($param !== false)
+        if ($param[0] !== false)
         {
             $sql = "SELECT id,name FROM rooms";
             $sql .= " WHERE "."id" .'='.$this->link->quote($param[0]).' AND ';
