@@ -10,10 +10,10 @@ class RoomsModel extends RestServer
         $this->link = $this->db;
     }
 
-    public function getRooms($data)
+    public function getRooms($param=false)
     {
 
-        $sql = "SELECT id,name FROM rooms";
+        /*$sql = "SELECT id,name FROM rooms";
         $sth = $this->link->prepare($sql);
         $result = $sth->execute();
         if (false === $result)
@@ -26,7 +26,32 @@ class RoomsModel extends RestServer
             return false;
         }
         $str = json_encode($data);
-        return $str;
+        return $str;*/
+        
+        
+        
+          
+       if($param[0] == "")
+       {
+         $sql = $sql = "SELECT id,name FROM rooms";
+              $sth = $this->link->prepare($sql);
+               $result = $sth->execute();
+             $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+               return $data;
+       }
+        if ($param !== false)
+        {
+            $sql = "SELECT id,name FROM rooms";
+            $sql .= " WHERE "."id" .'='.$this->link->quote($param[0]).' AND ';
+       
+        $sql = substr($sql, 0, -5);
+        $sth = $this->link->prepare($sql);
+        $result = $sth->execute();
+        $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+        }
+        
+        
     }
 
 }
