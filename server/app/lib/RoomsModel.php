@@ -33,7 +33,7 @@ class RoomsModel extends RestServer
           
        if($param[0] == "")
        {
-         $sql = $sql = "SELECT id,name FROM rooms";
+          $sql = "SELECT id,name FROM rooms";
               $sth = $this->link->prepare($sql);
                $result = $sth->execute();
              $data = $sth->fetchAll(PDO::FETCH_ASSOC);
