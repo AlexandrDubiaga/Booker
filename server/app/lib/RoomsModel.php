@@ -29,7 +29,7 @@ class RoomsModel extends RestServer
         return $str;*/
         
         
-        
+        var_dump($param[0]);
           
        if($param[0] == "")
        {
