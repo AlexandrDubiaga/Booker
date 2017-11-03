@@ -54,7 +54,6 @@ class RoomsModel extends RestServer
             $sql .= " WHERE "."id" .'='.$this->link->quote($param[0]).' AND ';
        
         $sql = substr($sql, 0, -5);
-        $sql = "SELECT id,name FROM rooms";
          $sth = $this->link->prepare($sql);
         $result = $sth->execute();
         if (false === $result)
