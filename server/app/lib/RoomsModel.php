@@ -31,14 +31,14 @@ class RoomsModel extends RestServer
         
         var_dump($param);
           
-       if($param[0] == "" || $param[0]==".txt" || $param[0]==".json" || $param[0]==".html" || $param[0]==".xml" )
-       {
+       //if($param[0] == "" )
+       //{
           $sql = "SELECT id,name FROM rooms";
               $sth = $this->link->prepare($sql);
                $result = $sth->execute();
              $data = $sth->fetchAll(PDO::FETCH_ASSOC);
                return $data;
-       }
+       //}
         if ($param !== false)
         {
             $sql = "SELECT id,name FROM rooms";
