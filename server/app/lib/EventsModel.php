@@ -55,8 +55,10 @@ class EventsModel extends RestServer
         $idUser = $this->link->quote($param['id_user']);
         $idRoom= $this->link->quote($param['id_room']);
         $desc= $this->link->quote($param['description']);
-        $dateStart = $this->link->quote(date('Y-m-d G:i:s',$param['time_start']));
-        $dateEnd = $this->link->quote(date('Y-m-d G:i:s',$param['time_end']));
+        $start = date('Y-m-d G:i:s',$param['time_start']);
+        $end = date('Y-m-d G:i:s',$param['time_end']);
+        $dateStart = $this->link->quote($start);
+        $dateEnd = $this->link->quote($end);
         $idParent= $this->link->quote($param['id_parent']);
         $dateCreate = $this->link->quote(date('Y-m-d G:i:s',$param['create_time']));
 
