@@ -31,8 +31,7 @@ class EmployeesModel extends RestServer
     public function addEmployees($url,$param)
     {
         $login = $this->link->quote($param['login']);
-        $pass = md5(md5(trim($_POST['pass'])));
-        $pass = $this->link->quote($pass);
+        $pass = $this->link->quote($param['pass']);
         $email = $this->link->quote($param['email']);
         $hash = "firstHash";
         $hash = $this->link->quote($hash);

@@ -29,23 +29,7 @@ class UsersModel extends RestServer
       
         return $str;
     }
-    public function addUser($url,$param)
-    {
-        $login = $this->link->quote($param['login']);
-        $pass = md5(md5(trim($_POST['pass'])));
-        $pass = $this->link->quote($pass);
-        $email = $this->link->quote($param['email']);
-        $hash = "firstHash";
-          $hash = $this->link->quote($hash);
 
-        $sql = "INSERT INTO users (login, pass, email, hash) VALUES (".$login.", ".$pass.",".$email.",".$hash.")";
-        $count = $this->link->exec($sql);
-        if ($count === false)
-        {
-            return false;
-        }
-        return $count;
-    }
 
     public function loginUser($url,$param)
     {
