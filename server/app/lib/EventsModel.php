@@ -60,7 +60,7 @@ class EventsModel extends RestServer
         $dateStart = $this->link->quote($start);
         $dateEnd = $this->link->quote($end);
         $idParent= $this->link->quote($param['id_parent']);
-        $create = date($param['create_time']);
+        $create = $param['create_time'];
         $dateCreate = $this->link->quote($create);
         $sql = "INSERT INTO events (id_user, id_room, description, time_start,time_end,id_parent,create_time) VALUES (".$idUser.", ".$idRoom.",".$desc.",".$dateStart.",".$dateEnd.",".$idParent.",".$dateCreate.")";
         $count = $this->link->exec($sql);
