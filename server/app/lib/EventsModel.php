@@ -27,12 +27,20 @@ class EventsModel extends RestServer
                 return false;
             }
             $str = json_encode($data);
+
             return $str;
         }
         if ($param[0] !== false)
         {
+            $putV = (explode('&', $param[0]));
+            $put = array();
+            foreach ($putV as $value)
+            {
+                $keyValue = explode('=', $value);
+                $put[$keyValue[0]]=$keyValue[1];
+            }
             $sql = "SELECT e.id, e.id_user,u.login as user_name,e.id_room,r.name as room_name,e.description,e.time_start,e.time_end,e.id_parent,e.create_time FROM events e LEFT JOIN users u ON e.id_user=u.id LEFT JOIN rooms r ON e.id_room=r.id";
-            $sql .= " WHERE "."r.id" .'='.$this->link->quote($param[0]).' AND ';
+            $sql .= " WHERE "."r.id" .'='.$this->link->quote($put['id_room']).' AND ' ;
             $sql = substr($sql, 0, -5);
             $sth = $this->link->prepare($sql);
             $result = $sth->execute();
@@ -46,6 +54,7 @@ class EventsModel extends RestServer
                 return false;
             }
             $str = json_encode($data);
+
             return $str;
         }
 
