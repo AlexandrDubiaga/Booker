@@ -108,6 +108,7 @@ class EventsModel extends RestServer
         }
         else
         {
+             var_dump('true');
             return 1;
         }
 
