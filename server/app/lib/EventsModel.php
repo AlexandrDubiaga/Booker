@@ -83,18 +83,18 @@ class EventsModel extends RestServer
     public function updateEvent($url,$param)
     {
         date_default_timezone_set('Europe/Kiev');
-        $curId = $this->link->quote($param['cur_id']);
-        $idUser =  $this->link->quote($param['id_user']);
-        $idRoom=  $this->link->quote($param['id_room']);
-        $desc=  $this->link->quote($param['description']);
+        $curId =  trim($this->link->quote($param['cur_id'], "'");
+        $idUser =  trim($this->link->quote($param['id_user'], "'");
+        $idRoom=  trim($this->link->quote($param['id_room'], "'");
+        $desc=   trim($this->link->quote($param['description'], "'");
         $startTime = $param['time_start'];
-        $start = $this->link->quote($startTime);
+        $start = trim($this->link->quote($startTime), "'");
         $endTime = $param['time_end'];
-        $end = $this->link->quote($endTime);
+        $end =  trim($this->link->quote($endTime);
         $idParent=1;
-        $par =  $this->link->quote($idParent);
+        $par =  trim($this->link->quote($idParent), "'");
         $createtime = date('Y-m-d H:i:s',$param['create_time']);
-        $create = $this->link->quote($createtime);
+        $create = trim($this->link->quote($createtime), "'");
         var_dump($desc);
         $sql = 'UPDATE events SET id_user=' . $idUser . ',id_room='. $idRoom .',description='. $desc .',time_start='. $startTime .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id=' .$curId;
         $count = $this->link->exec($sql);
@@ -108,6 +108,6 @@ class EventsModel extends RestServer
         }
 
     }
-
+ //$id = trim($id, "'");
 
 }
