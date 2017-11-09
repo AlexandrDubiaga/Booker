@@ -87,8 +87,9 @@ class EventsModel extends RestServer
         $idUser =  trim($this->link->quote($param['id_user']), "'");
         //$idRoom=  trim($this->link->quote($param['id_room']), "'");
         //$desc=   trim($this->link->quote($param['description']), "'");
-        $idRoom=  $param['id_room']);
-        $desc=   $param['description']);
+        $idRoom=  $this->link->quote($param['id_room']);
+        $desc=   $this->link->quote($param['description']);
+     
         $startTime = $param['time_start'];
         $start = trim($this->link->quote($startTime), "'");
         $endTime = $param['time_end'];
