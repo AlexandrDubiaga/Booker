@@ -61,7 +61,7 @@ class EventsModel extends RestServer
     }
     public function addEvent($url,$param)
     {   
-        //date_default_timezone_set('Europe/Kiev');
+        date_default_timezone_set('Europe/Kiev');
         $idUser = $this->link->quote($param['id_user']);
         $idRoom= $this->link->quote($param['id_room']);
         $desc= $this->link->quote($param['description']);
@@ -82,7 +82,7 @@ class EventsModel extends RestServer
     }
     public function updateEvent($url,$param)
     {
-        //date_default_timezone_set('Europe/Kiev');
+        date_default_timezone_set('Europe/Kiev');
         $curId = $this->link->quote($param['cur_id']);
         $idUser =  $this->link->quote($param['id_user']);
         $idRoom=  $this->link->quote($param['id_room']);
@@ -95,6 +95,7 @@ class EventsModel extends RestServer
         $par =  $this->link->quote($idParent);
         $createtime = date('Y-m-d H:i:s',$param['create_time']);
         $create = $this->link->quote($createtime);
+        var_dump($start);
         $sql = 'UPDATE events SET id_user=' . $idUser . ',id_room='. $idRoom .',description='. $desc .',time_start='. $startTime .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id=' .$curId;
         $count = $this->link->exec($sql);
         if ($count === false)
