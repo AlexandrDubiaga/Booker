@@ -100,7 +100,7 @@ class EventsModel extends RestServer
         //$sql = 'UPDATE events SET id_user=' . $idUser . ',id_room='. $idRoom .',description='. $desc .',time_start='. $startTime .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id=' . $curId;
         $sql = 'UPDATE events SET id_room='. $idRoom .',description='. $desc .',time_start='. $start .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id='.$curId;
         $count = $this->link->exec($sql);
-        var_dump( $count);
+        //var_dump( $count);
         if ($count === false)
         {
             return false;
