@@ -82,8 +82,7 @@ class EventsModel extends RestServer
     }
     public function updateEvent($url,$param)
     {
-        
-
+     
         $curId = $this->link->quote($param['cur_id']);
         $idUser =  $this->link->quote($param['id_user']);
         $idRoom=  $this->link->quote($param['id_room']);
