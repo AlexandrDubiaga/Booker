@@ -91,14 +91,14 @@ class EventsModel extends RestServer
         $startTime = $param['time_start'];
         $start = $this->link->quote($startTime);
         $endTime = $param['time_end'];
-        $end =  trim($this->link->quote($endTime), "'");
+        $end = $this->link->quote($endTime);
         $idParent=1;
-        $par =  trim($this->link->quote($idParent), "'");
+        $par =  $this->link->quote($idParent);
         $createtime = date('Y-m-d H:i:s',$param['create_time']);
-        $create = trim($this->link->quote($createtime), "'");
+        $create = $this->link->quote($createtime);
         //var_dump( $create);
         //$sql = 'UPDATE events SET id_user=' . $idUser . ',id_room='. $idRoom .',description='. $desc .',time_start='. $startTime .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id=' . $curId;
-        $sql = 'UPDATE events SET id_room='. $idRoom .',description='. $desc .',time_start='. $start .' WHERE id='.$curId;
+        $sql = 'UPDATE events SET id_room='. $idRoom .',description='. $desc .',time_start='. $start .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id='.$curId;
         $count = $this->link->exec($sql);
         var_dump( $count);
         if ($count === false)
