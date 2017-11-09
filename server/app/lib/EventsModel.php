@@ -85,8 +85,10 @@ class EventsModel extends RestServer
         date_default_timezone_set('Europe/Kiev');
         $curId =  trim($this->link->quote($param['id']), "'");
         $idUser =  trim($this->link->quote($param['id_user']), "'");
-        $idRoom=  trim($this->link->quote($param['id_room']), "'");
-        $desc=   trim($this->link->quote($param['description']), "'");
+        //$idRoom=  trim($this->link->quote($param['id_room']), "'");
+        //$desc=   trim($this->link->quote($param['description']), "'");
+        $idRoom=  $param['id_room']);
+        $desc=   $param['description']);
         $startTime = $param['time_start'];
         $start = trim($this->link->quote($startTime), "'");
         $endTime = $param['time_end'];
