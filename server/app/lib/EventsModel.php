@@ -105,19 +105,6 @@ class EventsModel extends RestServer
             return true;
         }
 
-//        $curId = trim($this->link->quote($param['cur_id']), "'");
-//        $idUser =  trim($this->link->quote($param['id_user']), "'");
-//        $idRoom=  trim($this->link->quote($param['id_room']), "'");
-//        $desc=  trim($this->link->quote($param['description']), "'");
-//        $startTime = $param['time_start'];
-//        $start = trim($this->link->quote($startTime), "'");
-//        $endTime = $param['time_end'];
-//        $end = trim($this->link->quote($endTime), "'");
-//        $idParent=1;
-//        $par =  trim($this->link->quote($idParent), "'");
-//        $createtime = date('Y-m-d H:i:s',$param['create_time']);
-//        $create = trim($this->link->quote($createtime), "'");
-
     }
 
 
