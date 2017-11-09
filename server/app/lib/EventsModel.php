@@ -95,7 +95,7 @@ class EventsModel extends RestServer
         $par =  trim($this->link->quote($idParent), "'");
         $createtime = date('Y-m-d H:i:s',$param['create_time']);
         $create = trim($this->link->quote($createtime), "'");
-        //var_dump($desc);
+        var_dump($desc);
         $sql = 'UPDATE events SET id_user=' . $idUser . ',id_room='. $idRoom .',description='. $desc .',time_start='. $startTime .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id=' .$curId;
         $count = $this->link->exec($sql);
         if ($count === false)
