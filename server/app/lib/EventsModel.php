@@ -60,12 +60,12 @@ class EventsModel extends RestServer
 
     }
     public function addEvent($url,$param)
-    {   //date_default_timezone_set('Europe/Kiev');
+    {   date_default_timezone_set('Europe/Kiev');
         $idUser = $this->link->quote($param['id_user']);
         $idRoom= $this->link->quote($param['id_room']);
         $desc= $this->link->quote($param['description']);
-        $start = date('Y-m-d G:i:s',$param['time_start']);
-        $end = date('Y-m-d G:i:s',$param['time_end']);
+        $start = date('Y-m-d H:i:s',$param['time_start']);
+        $end = date('Y-m-d H:i:s',$param['time_end']);
         $dateStart = $this->link->quote($start);
         $dateEnd = $this->link->quote($end);
         $idParent= $this->link->quote($param['id_parent']);
