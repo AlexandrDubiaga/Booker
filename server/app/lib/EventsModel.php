@@ -61,6 +61,7 @@ class EventsModel extends RestServer
     }
     public function addEvent($url,$param)
     {   date_default_timezone_set('Europe/Kiev');
+     var_dump($param);
         $idUser = $this->link->quote($param['id_user']);
         $idRoom= $this->link->quote($param['id_room']);
         $desc= $this->link->quote($param['description']);
@@ -81,6 +82,7 @@ class EventsModel extends RestServer
     }
     public function updateEvent($url,$param)
     {
+        
 
         $curId = $this->link->quote($param['cur_id']);
         $idUser =  $this->link->quote($param['id_user']);
