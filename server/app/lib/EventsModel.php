@@ -81,10 +81,20 @@ class EventsModel extends RestServer
     }
     public function updateEvent($url,$param)
     {
-        /*$id = $this->link->quote($param['id']);
-        $login = $this->link->quote($param['login']);
-        $email = $this->link->quote($param['email']);
-        $sql = 'UPDATE users SET login=' . $login . ', email='.$email .' WHERE id=' . $id;
+
+        $curId = $this->link->quote($param['cur_id']);
+        $idUser =  $this->link->quote($param['id_user']);
+        $idRoom=  $this->link->quote($param['id_room']);
+        $desc=  $this->link->quote($param['description']);
+        $startTime = $param['time_start'];
+        $start = $this->link->quote($startTime);
+        $endTime = $param['time_end'];
+        $end = $this->link->quote($endTime);
+        $idParent=1;
+        $par =  $this->link->quote($idParent);
+        $createtime = date('Y-m-d H:i:s',$param['create_time']);
+        $create = $this->link->quote($createtime);
+        $sql = 'UPDATE events SET id_user=' . $idUser . ',id_room='. $idRoom .',description='. $desc .',time_start='. $startTime .',time_end='. $end .',id_parent='. $par .',create_time='. $create .' WHERE id=' .$curId;
         $count = $this->link->exec($sql);
         if ($count === false)
         {
@@ -93,9 +103,20 @@ class EventsModel extends RestServer
         else
         {
             return true;
-        }*/
+        }
 
-
+//        $curId = trim($this->link->quote($param['cur_id']), "'");
+//        $idUser =  trim($this->link->quote($param['id_user']), "'");
+//        $idRoom=  trim($this->link->quote($param['id_room']), "'");
+//        $desc=  trim($this->link->quote($param['description']), "'");
+//        $startTime = $param['time_start'];
+//        $start = trim($this->link->quote($startTime), "'");
+//        $endTime = $param['time_end'];
+//        $end = trim($this->link->quote($endTime), "'");
+//        $idParent=1;
+//        $par =  trim($this->link->quote($idParent), "'");
+//        $createtime = date('Y-m-d H:i:s',$param['create_time']);
+//        $create = trim($this->link->quote($createtime), "'");
 
     }
 
