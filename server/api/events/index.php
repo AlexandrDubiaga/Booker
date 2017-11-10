@@ -24,5 +24,11 @@ class Events extends RestServer
         $result = $this->lib->updateEvent($url,$data);
         return $result;
     }
+    public function deleteEvents($url,$data)
+    {
+        $result = $this->lib->deleteEvent($url,$data);
+        return $result;
+    }
+
 }
 $cars = new Events();

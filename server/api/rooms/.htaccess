@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteBase /~user2/Booker/server/api/rooms/
-#RewriteBase /user2/Booker/server/api/rooms/
+#RewriteBase /~user2/Booker/server/api/rooms/
+RewriteBase /user2/Booker/server/api/rooms/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ index.php

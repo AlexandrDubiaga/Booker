@@ -112,6 +112,20 @@ class EventsModel extends RestServer
         }
 
     }
+    public function deleteEvent($id,$url)
+    {
+        $idEvent = $this->link->quote($id[0]);
+        $sql = "DELETE FROM events WHERE id = ".$idEvent;
+        $count = $this->link->exec($sql);
+        if($count)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
  //$id = trim($id, "'");
 
 }
