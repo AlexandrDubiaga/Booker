@@ -12,8 +12,9 @@ class UsersModel extends RestServer
 
     public function checkUsers($param=false)
     {
+
         $id = $this->link->quote(($param[0]));
-        $sql = "SELECT u.hash, u.login, r.name as role FROM users u LEFT JOIN roles r ON u.id_role=r.id WHERE u.id=".$id;
+        $sql = "SELECT u.id, u.hash, u.login, r.name as role FROM users u LEFT JOIN roles r ON u.id_role=r.id WHERE u.id=".$id;
         $sth = $this->link->prepare($sql);
         $result = $sth->execute();
         if (false === $result)
@@ -26,57 +27,57 @@ class UsersModel extends RestServer
             return false;
         }
         $str = json_encode($data);
-      
         return $str;
     }
 
-
     public function loginUser($url,$param)
     {
-            $login = $this->link->quote($param['login']);
-            $pass = $param['pass'];
-            $id = '';
-            $role = '';
-            $sql = "SELECT u.id, r.name as role,u.pass FROM users u LEFT JOIN roles r ON u.id_role=r.id WHERE login=". $login;
-            $sth = $this->link->prepare($sql);
-            $result = $sth->execute();
-            if (false === $result)
+        $login = $this->link->quote($param['login']);
+        $pass = $param['pass'];
+        $id = '';
+        $role = '';
+        $sql = "SELECT u.id, r.name as role,u.pass FROM users u LEFT JOIN roles r ON u.id_role=r.id WHERE login=". $login;
+        $sth = $this->link->prepare($sql);
+        $result = $sth->execute();
+        if (false === $result)
+        {
+            return false;
+        }
+        $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($data))
+        {
+            return false;
+        }
+        if (is_array($data))
+        {
+            foreach ($data as $val)
             {
-                return false;
-            }
-            $data = $sth->fetchAll(PDO::FETCH_ASSOC);
-            if (empty($data))
-            {
-                return false;
-            }
-            if (is_array($data)) {
-                foreach ($data as $val) {
-                    if ($pass !== $val['pass']) {
-                        return false;
-                    } else {
-                        $id = $this->link->quote($val['id']);
-                        $role = $val['role'];
-
-                    }
+                if ($pass !== $val['pass'])
+                {
+                    return false;
+                } else
+                {
+                    $id = $this->link->quote($val['id']);
+                    $role = $val['role'];
                 }
-
-            } else {
-                return false;
             }
-            $hash = $this->link->quote(md5($this->generateHash(10)));
-            $sql = 'UPDATE users SET hash=' . $hash . ' WHERE id=' . $id;
-            $count = $this->link->exec($sql);
-            if ($count === false)
-            {
-                return false;
-            }
-            $id = trim($id, "'");
-            $hash = trim($hash, "'");
-            $login = trim($login, "'");
-            $arrRes = array('id'=>$id, 'login'=>$login, 'hash'=>$hash, 'role'=>$role);
-            $str = json_encode($arrRes);
-            return $str;
-
+        }else
+        {
+            return false;
+        }
+        $hash = $this->link->quote(md5($this->generateHash(10)));
+        $sql = 'UPDATE users SET hash=' . $hash . ' WHERE id=' . $id;
+        $count = $this->link->exec($sql);
+        if ($count === false)
+        {
+            return false;
+        }
+        $id = trim($id, "'");
+        $hash = trim($hash, "'");
+        $login = trim($login, "'");
+        $arrRes = array('id'=>$id, 'login'=>$login, 'hash'=>$hash, 'role'=>$role);
+        $str = json_encode($arrRes);
+        return $str;
     }
 
     function generateHash($length=6)
@@ -99,9 +100,9 @@ class UsersModel extends RestServer
         {
             return true;
         }
-        else{
+        else
+        {
             return false;
         }
-
     }
 }
