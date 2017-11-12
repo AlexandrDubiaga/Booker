@@ -1,8 +1,12 @@
 <?php
 include ('DB.php');
+
+/**
+ * Class RestServer
+ */
 class RestServer extends DB
 {
-     protected $cookies;
+    protected $cookies;
     protected $reqMethod;
     protected $url;
     protected $param;
@@ -10,15 +14,21 @@ class RestServer extends DB
     protected $db;
     protected $data;
 
+    /**
+     * RestServer constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->db = $this->dBMain;
     }
 
+    /**
+     * created url for project
+     */
     public function run()
     {
-      $this->url = list($s, $user, $REST, $server, $api, $dir, $index, $class, $data) = explode("/", $_SERVER['REQUEST_URI'], 7);
+        $this->url = list($s, $user, $REST, $server, $api, $dir, $index, $class, $data) = explode("/", $_SERVER['REQUEST_URI'], 7);
         $this->reqMethod = $_SERVER['REQUEST_METHOD'];
         $this->encode = $this->url[6];
         header('Access-Control-Allow-Origin:*');
@@ -26,16 +36,13 @@ class RestServer extends DB
         header('Access-Control-Allow-Headers: Authorization, Content-Type');
         switch ($this->reqMethod)
         {
-                case 'GET':
+            case 'GET':
                 $this->setMethod('get'.ucfirst($dir), explode('/', $index));
                 break;
-                case 'DELETE':
-                    $this->setMethod('delete'.ucfirst($dir), explode('/',  $index));
+            case 'DELETE':
+                $this->setMethod('delete'.ucfirst($dir), explode('/',  $index));
                 break;
-                case 'POST':
-                 /* $put = json_decode(file_get_contents("php://input"), true);
-                    $this->setMethod('post'.ucfirst($dir), explode('/', $index), $put);
-   */
+            case 'POST':
                     $putV = (explode('&', file_get_contents("php://input")));
                     $put = array();
                     foreach ($putV as $value)
@@ -45,10 +52,10 @@ class RestServer extends DB
                     }
                 $this->setMethod('post'.ucfirst($dir), explode('/', $index), $put);
                 break;
-                case 'PUT':
-                    $put = json_decode(file_get_contents("php://input"), true);
-                    $this->setMethod('put'.ucfirst($dir), explode('/', $index), $put);
-                    break;
+            case 'PUT':
+                $put = json_decode(file_get_contents("php://input"), true);
+                $this->setMethod('put'.ucfirst($dir), explode('/', $index), $put);
+                break;
             case 'OPTIONS':
                 header('Access-Control-Allow-Origin:*');
                 header('Access-Control-Allow-Methods: PUT, POST, GET, DELETE');
@@ -56,16 +63,22 @@ class RestServer extends DB
                 exit();
                 break;
         }
-
-
     }
 
+    /**
+     * @param $classMethod
+     * @param bool $param
+     * @param bool $outPutt
+     */
     public function setMethod($classMethod, $param=false, $outPutt = false)
     {
-
-                echo $this->$classMethod($param,$outPutt);
-
+        echo $this->$classMethod($param,$outPutt);
     }
+
+    /**
+     * @param $data
+     * @return mixed|string|void
+     */
      protected function encodedData($data)
     {
         switch ($this->encode)
@@ -87,17 +100,27 @@ class RestServer extends DB
         }
     }
 
+    /**
+     * @param $data
+     */
     public function convertToJson($data)
     {
-        //header('Content-Type: application/json');
        echo json_encode($data);
     }
+
+    /**
+     * @param $data
+     */
      public function convertToTxt($data)
     {
          header("Content-Type: text/javascript");
          print_r($data);
-
     }
+
+    /**
+     * @param $data
+     * @return string
+     */
      public function convertToHtml($data)
     {
             header("Content-type: text/html\n");
@@ -113,6 +136,11 @@ class RestServer extends DB
          return '<ul>'.convertToHtml($data).'</ul>';
     }
 
+    /**
+     * @param $data
+     * @param $root
+     * @return mixed
+     */
     public function convertToXml($data, $root)
     {
         header("Content-type: text/xml");
@@ -135,7 +163,13 @@ class RestServer extends DB
             }
         }
         return $xml->asXML();
-}
+    }
+
+    /**
+     * @param $array
+     * @param $xml
+     * @param $root
+     */
 
     function array2xml( $array, &$xml, $root )
     {
@@ -160,10 +194,14 @@ class RestServer extends DB
                 {
                 $xml->addChild( $element, $value );
             }
+            }
         }
     }
-}
 
+    /**
+     * @param $array
+     * @return bool
+     */
     function isNumericKeys( $array )
     {
         foreach( $array as $key=>$value )

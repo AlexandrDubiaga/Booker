@@ -1,21 +1,31 @@
 <?php
 include ('../../app/RestServer.php');
+
+/**
+ * Class EventsModel
+ */
 class EventsModel extends RestServer
 {
     private $link;
 
+    /**
+     * EventsModel constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->link = $this->db;
     }
 
+    /**
+     * @param bool $param
+     * @return bool|string
+     */
     public function checkEvent($param=false)
     {
-
         if($param[0] == "")
         {
-            $sql = "SELECT events.id,events.id_user, users.login,events.id_room,rooms.name,events.description,events.time_start,events.time_end,events.id_parent,events.create_time FROM events,users,rooms WHERE events.id_user = users.id AND events.id_user = rooms.id";
+            $sql = "SELECT events.id,events.id_user,events.id_room,events.description,events.time_start,events.time_end,events.id_parent,events.create_time FROM events";
             $sth = $this->link->prepare($sql);
             $result = $sth->execute();
             if (false === $result)
@@ -33,14 +43,6 @@ class EventsModel extends RestServer
         }
         if ($param[0] !== false)
         {
-//            $putV = (explode('&', $param[0]));
-//            $put = array();
-//            foreach ($putV as $value)
-//            {
-//                $keyValue = explode('=', $value);
-//                $put[$keyValue[0]]=$keyValue[1];
-//            }
-//            var_dump($param[0]);
            $sql = "SELECT e.id, e.id_user,u.login as user_name,e.id_room,r.name as room_name,e.description,e.time_start,e.time_end,e.id_parent,e.create_time FROM events e LEFT JOIN users u ON e.id_user=u.id LEFT JOIN rooms r ON e.id_room=r.id";
             $sql .= " WHERE "."e.id_room" .'='.$this->link->quote($param[0]).' AND ' ;
             $sql = substr($sql, 0, -5);
@@ -61,15 +63,22 @@ class EventsModel extends RestServer
         }
 
     }
+
+    /**
+     * @param $url
+     * @param $param
+     * @return bool|int
+     */
+
     public function addEvent($url,$param)
     {
+        $descChange = str_replace("+", " ", $param['description']);
         date_default_timezone_set('Europe/Kiev');
-        if(isset($param['id_user'])&& isset($param['id_room']) && isset($param['description'])  && isset($param['time_start']) && isset($param['time_end']))
+        if(isset($param['id_user'])&& isset($param['id_room']) && isset($descChange)  && isset($param['time_start']) && isset($param['time_end']))
         {
-
                 $idUser = $this->link->quote($param['id_user']);
                 $idRoom= $this->link->quote($param['id_room']);
-                $desc= $this->link->quote($param['description']);
+                $desc= $this->link->quote($descChange);
                 $start = date('Y-m-d H:i:s',$param['time_start']);
                 $end = date('Y-m-d H:i:s',$param['time_end']);
                 $dateStart = $this->link->quote($start);
@@ -90,6 +99,12 @@ class EventsModel extends RestServer
         }
         return false;
     }
+
+    /**
+     * @param $url
+     * @param $param
+     * @return bool|int
+     */
     public function updateEvent($url,$param)
     {
         date_default_timezone_set('Europe/Kiev');
@@ -118,6 +133,12 @@ class EventsModel extends RestServer
             return 1;
         }
     }
+
+    /**
+     * @param $id
+     * @param $url
+     * @return bool
+     */
     public function deleteEvent($id,$url)
     {
         $idEvent = $this->link->quote($id[0]);

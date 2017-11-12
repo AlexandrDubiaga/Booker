@@ -1,14 +1,26 @@
 <?php
 include ('../../app/RestServer.php');
+
+/**
+ * Class RoomsModel
+ */
 class RoomsModel extends RestServer
 {
     private $link;
 
+    /**
+     * RoomsModel constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->link = $this->db;
     }
+
+    /**
+     * @param bool $param
+     * @return bool|string
+     */
 
     public function getRooms($param=false)
     {

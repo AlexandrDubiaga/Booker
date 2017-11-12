@@ -1,8 +1,14 @@
 <?php
-//inclube('config.php');
+
+/**
+ * Class DB
+ */
 class DB
 {
     protected $dBMain;
+    /**
+     * DB constructor.
+     */
     public function __construct()
     {
         //$this->dBMain = new PDO('mysql:host=localhost;dbname=user2', 'user2', 'tuser2');

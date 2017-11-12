@@ -1,8 +1,16 @@
 <?php
 include ('../../app/RestServer.php');
+
+/**
+ * Class UsersModel
+ */
 class UsersModel extends RestServer
 {
     private $link;
+
+    /**
+     * UsersModel constructor.
+     */
 
     public function __construct()
     {
@@ -10,9 +18,12 @@ class UsersModel extends RestServer
         $this->link = $this->db;
     }
 
+    /**
+     * @param bool $param
+     * @return bool|string
+     */
     public function checkUsers($param=false)
     {
-
         $id = $this->link->quote(($param[0]));
         $sql = "SELECT u.id, u.hash, u.login, r.name as role FROM users u LEFT JOIN roles r ON u.id_role=r.id WHERE u.id=".$id;
         $sth = $this->link->prepare($sql);
@@ -29,6 +40,12 @@ class UsersModel extends RestServer
         $str = json_encode($data);
         return $str;
     }
+
+    /**
+     * @param $url
+     * @param $param
+     * @return bool|string
+     */
 
     public function loginUser($url,$param)
     {
@@ -80,6 +97,11 @@ class UsersModel extends RestServer
         return $str;
     }
 
+    /**
+     * @param int $length
+     * @return string
+     */
+
     function generateHash($length=6)
     {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
@@ -91,6 +113,12 @@ class UsersModel extends RestServer
         }
         return $code;
     }
+
+    /**
+     * @param $id
+     * @param $url
+     * @return bool
+     */
     public function deleteUser($id,$url)
     {
         $idUser = $this->link->quote($id[0]);
