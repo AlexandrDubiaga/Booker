@@ -1,0 +1,7 @@
+RewriteEngine On
+#RewriteBase /~user2/Booker/server/api/modalemployee/
+RewriteBase /user2/Booker/server/api/modalemployee/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php
+DirectoryIndex index.php
