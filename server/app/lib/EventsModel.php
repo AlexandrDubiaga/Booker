@@ -25,7 +25,7 @@ class EventsModel extends RestServer
     {
         if($param[0] == "")
         {
-            echo 'alex';
+            echo $param[0];
 //              $sql = "SELECT e.id, e.id_user,u.login as user_name,e.id_room,r.name as room_name,e.description,e.time_start,e.time_end,e.id_parent,e.create_time FROM events e LEFT JOIN users u ON e.id_user=u.id LEFT JOIN rooms r ON e.id_room=r.id";
 //             $sql .= " WHERE "."e.id_room" .'='.$this->link->quote(1).' AND ' ;
 //             $sql = substr($sql, 0, -5);
